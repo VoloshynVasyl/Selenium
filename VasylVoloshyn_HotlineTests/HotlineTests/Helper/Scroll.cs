@@ -5,7 +5,7 @@ namespace HotlineTests.Helper
 {
     public static class Scroll
     {
-        public static void ToElement(IWebDriver driver ,By by)
+        public static void ToElement(IWebDriver driver, By by)
         {
             Point coordsOfElem = driver.FindElement(by).Location;
             IJavaScriptExecutor jse = (IJavaScriptExecutor)driver;

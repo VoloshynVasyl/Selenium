@@ -3,7 +3,7 @@ using HotlineTests.Helper;
 
 namespace HotlineTests.Page
 {
-    public class SearchResult
+    public class SearchResult : Home
     {
         private const string COMPARE = "(.//a[@class='cell but-box g_statistic m_t-10'])";
         private By _compare = By.XPath(COMPARE);
@@ -11,7 +11,7 @@ namespace HotlineTests.Page
         private IWebDriver _driver;
         private const int DEFAULT = 1;
 
-        public SearchResult(IWebDriver driver)
+        public SearchResult(IWebDriver driver) : base(driver)
         {
             _driver = driver;
         }
@@ -19,7 +19,10 @@ namespace HotlineTests.Page
         public void ClickButtonToCompare(int buttonIndex = DEFAULT)
         {
             Wait.ForElementToBeClickable(_driver, _compare);
-            _driver.FindElement(By.XPath(COMPARE+"["+buttonIndex+"]")).Click();
+            By path = By.XPath(COMPARE + "[" + buttonIndex + "]");
+
+            Scroll.ToElement(_driver, path);
+            _driver.FindElement(path).Click();
         }
     }
 }

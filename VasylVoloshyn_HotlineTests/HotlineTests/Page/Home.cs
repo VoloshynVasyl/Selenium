@@ -8,8 +8,8 @@ namespace HotlineTests.Page
         private const string SEARCH_FIELD = ".//*[@id='searchbox']";
         private By _searchField = By.XPath(SEARCH_FIELD);
 
-        public const string SEARCH_BUTTON = ".//*[@id='doSearch']";
-        public By SearchButton = By.XPath(SEARCH_BUTTON);
+        private const string SEARCH_BUTTON = ".//*[@id='doSearch']";
+        private By _searchButton = By.XPath(SEARCH_BUTTON);
 
         private IWebDriver _driver;
 
@@ -26,8 +26,8 @@ namespace HotlineTests.Page
 
         public void ClickSearchButton()
         {
-            Wait.ForElementToBeClickable(_driver, SearchButton);
-            _driver.FindElement(SearchButton).Click();
+            Wait.ForElementToBeClickable(_driver, _searchButton);
+            _driver.FindElement(_searchButton).Click();
         }
 
         public void DoSearchByWord(string word)

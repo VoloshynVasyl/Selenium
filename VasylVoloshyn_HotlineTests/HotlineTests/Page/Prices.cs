@@ -6,7 +6,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace HotlineTests.Page
 {
-    public class Prices
+    public class Prices : CurrentProduct
     {        
         private const string PATH_TO_ALL_PROPOSITIONS = ".//*[@id='gotoshop-price']";
         private By _pathToAllPropositions = By.XPath(PATH_TO_ALL_PROPOSITIONS);
@@ -23,7 +23,7 @@ namespace HotlineTests.Page
         private IWebDriver _driver;
         private const int  DEFAULT = 1;
 
-        public Prices(IWebDriver driver)
+        public Prices(IWebDriver driver) : base(driver)
         {
             _driver = driver;
         }
@@ -32,6 +32,7 @@ namespace HotlineTests.Page
         {
             Wait.ForElementToBeClickable(_driver, _pathToSortByPriceButton);
 
+            Scroll.ToElement(_driver, _pathToSortByPriceButton);
             _driver.FindElement(_pathToSortByPriceButton).Click();
 
             WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(Wait.DEFAULT_TIMEOUT));
@@ -44,7 +45,6 @@ namespace HotlineTests.Page
             By pathToButton = By.XPath(PATH_TO_ALL_BUTTON_TO_SHOP + "[" + buttonIndex + "]");
 
             Scroll.ToElement(_driver, pathToButton);
-
             _driver.FindElement(pathToButton).Click();
         }
 

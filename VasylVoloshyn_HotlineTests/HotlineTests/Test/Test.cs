@@ -57,6 +57,6 @@ namespace HotlineTests.Test
             condition = someShop.ThisPagesTitleNotContains(homeTitleSubstring);
 
             Assert.True(condition);
-        }        
+        }
     }
 }
