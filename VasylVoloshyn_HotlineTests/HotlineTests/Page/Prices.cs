@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using HotlineTests.Helper;
 using System.Collections.Generic;
 using OpenQA.Selenium.Support.UI;
+using System.Linq;
 
 namespace HotlineTests.Page
 {
@@ -58,20 +59,20 @@ namespace HotlineTests.Page
         private int FindShopWithMinimalPrice()
         {
             IReadOnlyCollection<IWebElement> listOfWebElements = _driver.FindElements(_pathToAllPropositions);
-            List<string> listOfElemnts = new List<string>();
-            List<string> sortedListOfElements = new List<string>();
+            Dictionary<int, string> listOfElements = new Dictionary<int, string>();
 
+            int index = 1;
             foreach (IWebElement element in listOfWebElements)
             {
-                listOfElemnts.Add(element.Text);
-                sortedListOfElements.Add(element.Text);
+                listOfElements.Add(index, element.Text);
+                index ++;
             }
 
-            sortedListOfElements.Sort();
-            string minimumValue = sortedListOfElements[0];
+            IOrderedEnumerable<KeyValuePair<int, string>> items = from pair in listOfElements
+                        orderby pair.Value ascending
+                        select pair;
 
-            int minimum = listOfElemnts.IndexOf(minimumValue);
-            return minimum + 1;            
+            return items.First().Key;            
         }
     }
 }
